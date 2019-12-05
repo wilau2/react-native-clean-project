@@ -58,6 +58,10 @@ If you have yarn installed but your project is using npm, you can specify `--isY
 
 Example: `./node_modules/.bin/react-native-clean-project --remove-iOS-build`
 
+If you don't want to have interactive questions, add the `--ci` flag.
+
+Example: `./node_modules/.bin/react-native-clean-project --remove-iOS-build --ci`
+
 ## Other Tips
 
 You can also reset the Metro bundler cache when starting with `react-native start --reset-cache`
