@@ -65,13 +65,12 @@ const checkAnswer = (answer, questionFunction, resolve) => {
 
 const askIsYarnProject = () =>
   new Promise(resolve => {
-    if (args.includes('--isYarnProject')) {
-      isYarnProject = true;
-      return resolve();
-    }
     if (args.includes('--isNotYarnProject')) {
       isYarnProject = false;
       return resolve();
+    }
+    if (args.includes('--ci')){
+      return resolve(); 
     }
     return askQuestion('Is a yarn project? (Y/n) ', answer => {
       wipeiOSBuild = checkAnswer(answer, askiOS, resolve);
@@ -112,6 +111,9 @@ const askAndroidCleanProject = () =>
       cleanAndroidProject = true;
       return resolve();
     }
+    if (args.includes('--ci')){
+      return resolve(); 
+    
     return askQuestion('Clean Android project? (Y/n) ', answer => {
       cleanAndroidProject = checkAnswer(answer, askAndroidCleanProject, resolve);
     });
