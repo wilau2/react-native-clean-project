@@ -43,11 +43,8 @@ options
     }
     if (options.getWipeNodeModules()) {
       executeTask(tasks.wipeNodeModules)
-        .then(() => executeTask(tasks.npmCacheVerify))
-        .then(() => executeTask(tasks.npmInstall))
-        .then(
-          () => options.getShouldExecYarn() && executeTask(tasks.yarnCacheClean) && executeTask(tasks.yarnInstall)
-        )
+        .then(() => options.getShouldExecNpm() && executeTask(tasks.npmCacheVerify) && executeTask(tasks.npmInstall))
+        .then(() => options.getShouldExecYarn() && executeTask(tasks.yarnCacheClean) && executeTask(tasks.yarnInstall))
         .then(() => options.getUpdatePods() && executeTask(tasks.updatePods))
         .catch(() => {
           console.log(

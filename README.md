@@ -46,7 +46,7 @@ This is a combination of the commands suggested in the React Native documentatio
 | Yarn cache            | `yarn cache clean`               | Yes                      | Yes        | true     | --keep-node-modules    |
 | Yarn packages         | `yarn install`                   | No                       | Yes        | true     | --keep-node-modules    |
 | NPM cache             | `npm cache verify`               | Yes                      | Yes        | true     | --keep-node-modules    |
-| NPM Install           | `npm ci`                         | No                      | Yes        | true     | --keep-node-modules    |
+| NPM Install           | `npm ci`                         | No                       | Yes        | true     | --keep-node-modules    |
 | iOS build folder      | `rm -rf ios/build`               | Yes                      | Yes        | false    | --remove-iOS-build     |
 | iOS pods folder       | `rm -rf ios/pods`                | Yes                      | Yes        | false    | --remove-iOS-pods      |
 | Android build folder  | `rm -rf android/build`           | Yes                      | Yes        | false    | --remove-android-build |
@@ -54,7 +54,8 @@ This is a combination of the commands suggested in the React Native documentatio
 | Brew package          | `brew update && brew upgrade`    | No                       | Yes        | true     | --keep-brew            |
 | Pod packages          | `pod update`                     | No                       | Yes        | true     | --keep-pods            |
 
-If you have yarn installed but your project is using npm, you can specify `--isYarnProject`||`--isNotYarnProject` and this will skip `Yarn cache` & `Yarn packages`
+You can specify `--shouldNotExecYarnProject` and this will skip `Yarn cache` & `Yarn packages`
+You can specify `--shouldNotExecNPMProject` and this will skip `NPM cache` & `NPM Install`
 
 Example: `./node_modules/.bin/react-native-clean-project --remove-iOS-build`
 

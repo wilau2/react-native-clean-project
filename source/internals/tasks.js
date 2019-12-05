@@ -7,72 +7,88 @@ const tasks = {
     name: 'wipe iOS build artifacts',
     command:
       'rm -rf ios/build && (killall Xcode || true) && xcrun -k && cd ios && xcodebuild -alltargets clean && cd .. && rm -rf "$(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang/ModuleCache" && rm -rf "$(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang.$(whoami)/ModuleCache" && rm -fr ~/Library/Developer/Xcode/DerivedData/ && rm -fr ~/Library/Caches/com.apple.dt.Xcode/',
-    args: []
+    args: [],
+    options: {}
   },
   wipeiOSPodsFolder: {
     name: 'wipe iOS Pods folder',
     command: 'rm',
-    args: ['-rf', 'ios/Pods']
+    args: ['-rf', 'ios/Pods'],
+    options: {}
   },
   updatePods: {
     name: 'update iOS Pods',
     command: 'cd ios && pod update',
-    args: []
+    args: [],
+    options: {}
   },
   wipeAndroidBuildFolder: {
     name: 'wipe android build folder',
     command: 'rm',
-    args: ['-rf', 'android/build']
+    args: ['-rf', 'android/build'],
+    options: {}
   },
   cleanAndroidProject: {
     name: 'clean android project',
-    command: '(cd android && ./gradlew clean)',
-    args: []
+    command: './gradlew',
+    args: ['clean'],
+    options: {
+      cwd: 'android'
+    }
   },
   watchmanCacheClear: {
     name: 'watchman cache clear (if watchman is installed)',
     command: 'watchman watch-del-all || true',
-    args: []
+    args: [],
+    options: {}
   },
   wipeTempCaches: {
     name: 'wipe temporary caches',
     command: 'rm',
-    args: ['-rf', '$TMPDIR/react-*', '$TMPDIR/metro-*']
+    args: ['-rf', '$TMPDIR/react-*', '$TMPDIR/metro-*'],
+    options: {}
   },
   brewUpdate: {
     name: 'brew update',
     command: 'brew',
-    args: ['update']
+    args: ['update'],
+    options: {}
   },
   brewUpgrade: {
     name: 'brew upgrade',
     command: 'brew',
-    args: ['upgrade']
+    args: ['upgrade'],
+    options: {}
   },
   wipeNodeModules: {
     name: 'wipe node_modules',
     command: 'rm',
-    args: ['-rf', 'node_modules', '$TMPDIR/react-*', '$TMPDIR/metro-*']
+    args: ['-rf', 'node_modules', '$TMPDIR/react-*', '$TMPDIR/metro-*'],
+    options: {}
   },
   yarnCacheClean: {
     name: 'yarn cache clean (if yarn is installed)',
     command: 'test -f yarn.lock && yarn cache clean || true',
-    args: []
+    args: [],
+    options: {}
   },
   yarnInstall: {
     name: 'yarn install (if yarn is installed)',
     command: 'test -f yarn.lock && yarn install || true',
-    args: []
+    args: [],
+    options: {}
   },
   npmCacheVerify: {
     name: 'npm cache verify',
     command: 'npm',
-    args: ['cache', 'verify']
+    args: ['cache', 'verify'],
+    options: {}
   },
   npmInstall: {
     name: 'npm ci',
     command: 'test -f package-lock.json && npm ci || true',
-    args: []
+    args: [],
+    options: {}
   }
 };
 

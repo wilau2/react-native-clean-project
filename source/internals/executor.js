@@ -13,7 +13,7 @@ function elapsedTime(startTime) {
 function executeTask(task) {
   return new Promise((resolve, reject) => {
     const startTime = process.hrtime();
-    const spawnedTask = spawn(task.command, task.args, { shell: true });
+    const spawnedTask = spawn(task.command, task.args, { ...task.options, shell: true });
 
     spawnedTask.stderr.on('data', data => {
       console.log(`Error running '${task.name}': ${data}`);

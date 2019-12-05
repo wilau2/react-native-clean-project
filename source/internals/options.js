@@ -16,10 +16,15 @@ let wipeAndroidBuild = false;
 let wipeNodeModules = true;
 let updateBrew = true;
 let updatePods = true;
-let isYarnProject = true;
+let shouldExecYarn = true;
+let shouldExecNPM = true;
+
+const getShouldExecNpm = () => {
+  return shouldExecNPM;
+}
 
 const getShouldExecYarn = () => {
-  return isYarnProject;
+  return shouldExecYarn;
 };
 
 const getCleanAndroidProject = () => {
@@ -63,17 +68,31 @@ const checkAnswer = (answer, questionFunction, resolve) => {
   return false;
 };
 
-const askIsYarnProject = () =>
+const askShouldExecNPMProject = () =>
   new Promise(resolve => {
-    if (args.includes('--isNotYarnProject')) {
-      isYarnProject = false;
+    if (args.includes('--shouldNotExecNPMProject')) {
+      shouldExecNPM = false;
       return resolve();
     }
     if (args.includes('--ci')){
       return resolve(); 
     }
-    return askQuestion('Is a yarn project? (Y/n) ', answer => {
-      wipeiOSBuild = checkAnswer(answer, askiOS, resolve);
+    return askQuestion('Should exec npm project? (Y/n) ', answer => {
+      shouldExecNPM = checkAnswer(answer, askShouldExecNPMProject, resolve);
+    });
+  });
+
+const askShouldExecYarnProject = () =>
+  new Promise(resolve => {
+    if (args.includes('--shouldNotExecYarnProject')) {
+      shouldExecYarn = false;
+      return resolve();
+    }
+    if (args.includes('--ci')){
+      return resolve(); 
+    }
+    return askQuestion('Should exec yarn project? (Y/n) ', answer => {
+      shouldExecYarn = checkAnswer(answer, askShouldExecYarnProject, resolve);
     });
   });
 
@@ -111,7 +130,7 @@ const askAndroidCleanProject = () =>
       cleanAndroidProject = true;
       return resolve();
     }
-    if (args.includes('--ci')){
+    if (args.includes('--ci')) {
       return resolve(); 
     }
     return askQuestion('Clean Android project? (Y/n) ', answer => {
@@ -184,6 +203,7 @@ module.exports = {
   getUpdateBrew,
   getUpdatePods,
   getShouldExecYarn,
+  getShouldExecNpm,
   askiOS,
   askiOSPods,
   askUpdatePods,
@@ -191,6 +211,7 @@ module.exports = {
   askAndroidCleanProject,
   askNodeModules,
   askBrew,
-  askIsYarnProject,
+  askShouldExecNPMProject,
+  askShouldExecYarnProject,
   rlInterface
 };
