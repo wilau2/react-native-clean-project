@@ -11,7 +11,8 @@ options
   .then(options.askAndroidCleanProject)
   .then(options.askNodeModules)
   .then(options.askBrew)
-  .then(options.askIsYarnProject)
+  .then(options.askShouldExecNPMProject)
+  .then(options.askShouldExecYarnProject)
   .then(() => {
     options.rlInterface.close();
     if (options.getWipeiOSBuild()) {
